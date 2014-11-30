@@ -92,16 +92,16 @@ public class MouseCameraControl : MonoBehaviour
 	public MouseScrollConfiguration scroll = new MouseScrollConfiguration();
 	
 	//constraint in the interval [lowerBound,upperBound]
-	void constraintRotation(Transform controlledTransform, float currentAngle, float rotationAmount,float lowerBound, float upperBound, Vector3 rotationVec) { //rotationAmount should contain sign
-		if(currentAngle > 90) {
+	void constraintRotation(Transform controlledTransform, float thresholdAngle, float currentAngle, float rotationAmount,float lowerBound, float upperBound, Vector3 rotationVec) { //rotationAmount should contain sign
+		if(currentAngle > thresholdAngle) {
 			currentAngle -= 360;
 		}
 		//Debug.Log("eulerX:" + currentEulerAngleX);
 		float intendedAngle = currentAngle + rotationAmount;
-		if(intendedAngle < pitch.lowerBound) {
+		if(intendedAngle < lowerBound) {
 			controlledTransform.Rotate((lowerBound - currentAngle) * rotationVec);
 		}
-		else if(intendedAngle > pitch.upperBound) {
+		else if(intendedAngle > upperBound) {
 			controlledTransform.Rotate((upperBound - currentAngle) * rotationVec);
 		}
 		else {
@@ -115,7 +115,9 @@ public class MouseCameraControl : MonoBehaviour
 //			float rotationX = Input.GetAxis(mouseHorizontalAxisName) * yaw.sensitivity;
 //			yaw.controlledTransform.Rotate(0, rotationX, 0);
 			Transform toControllTransform = yaw.controlledTransform;
+			Debug.Log(toControllTransform.localEulerAngles.y + Input.GetAxis(mouseHorizontalAxisName) * yaw.sensitivity);
 			constraintRotation(toControllTransform,
+			                   95,
 			                   toControllTransform.localEulerAngles.y,
 			                   Input.GetAxis(mouseHorizontalAxisName) * yaw.sensitivity,
 			                   yaw.lowerBound,
@@ -128,6 +130,7 @@ public class MouseCameraControl : MonoBehaviour
 		{
 			Transform toControllTransform = pitch.controlledTransform;
 			constraintRotation(toControllTransform, 
+			                   90,
 			                   toControllTransform.localEulerAngles.x,
 			                   -1 * Input.GetAxis(mouseVerticalAxisName) * pitch.sensitivity, 
 			                   pitch.lowerBound, 
