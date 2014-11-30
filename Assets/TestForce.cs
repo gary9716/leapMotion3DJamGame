@@ -34,7 +34,9 @@ public class TestForce : MonoBehaviour {
 	}
 
 	void fly() {
-		rigidbody.AddForce(new Vector3(-10,0,0),ForceMode.VelocityChange);
+		rigidbody.drag = 0;
+		rigidbody.angularDrag = 0.05f;
+		rigidbody.AddForce(new Vector3(0,10,0),ForceMode.VelocityChange);
 	}
 
 	//public LayerMask floorMask;
@@ -43,6 +45,8 @@ public class TestForce : MonoBehaviour {
 
 		if(collision.gameObject.name=="Floor" && navAgentEnableFlag) {
 			agent.enabled = true;
+			rigidbody.drag = Mathf.Infinity;
+			rigidbody.angularDrag = Mathf.Infinity;
 		}
 		
 	}

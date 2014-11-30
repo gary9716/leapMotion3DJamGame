@@ -115,7 +115,7 @@ public class MouseCameraControl : MonoBehaviour
 //			float rotationX = Input.GetAxis(mouseHorizontalAxisName) * yaw.sensitivity;
 //			yaw.controlledTransform.Rotate(0, rotationX, 0);
 			Transform toControllTransform = yaw.controlledTransform;
-			Debug.Log(toControllTransform.localEulerAngles.y + Input.GetAxis(mouseHorizontalAxisName) * yaw.sensitivity);
+			//Debug.Log(toControllTransform.localEulerAngles.y + Input.GetAxis(mouseHorizontalAxisName) * yaw.sensitivity);
 			constraintRotation(toControllTransform,
 			                   95,
 			                   toControllTransform.localEulerAngles.y,

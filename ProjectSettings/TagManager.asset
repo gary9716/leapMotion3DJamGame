@@ -3,7 +3,26 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - beatBone
+  - 
+  - Interact
+  - Weapon
+  - Wood
+  - 
+  - Environment
+  - Friend
+  - IgnoreRecast
+  - Enemy
+  - wood
+  - 
+  - pickupAble
+  - Explosion
+  - glass
+  - metal
+  - Manager
+  - LockCursor
+  - Missile
+  - WeaponCamera
+  - Laser
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -13,11 +32,11 @@ TagManager:
   Builtin Layer 5: UI
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: Floor
-  User Layer 9: Shootable
-  User Layer 10: Touchable
-  User Layer 11: Player
-  User Layer 12: Beatable
+  User Layer 8: FPS Arms
+  User Layer 9: IgnoreBullets
+  User Layer 10: Player
+  User Layer 11: Sensor
+  User Layer 12: Floor
   User Layer 13: 
   User Layer 14: 
   User Layer 15: 
