@@ -37,7 +37,8 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400010}
-  m_Layer: 9
+  - 114: {fileID: 11400014}
+  m_Layer: 15
   m_Name: ZomBunny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,6 +316,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setIndex: 4
   effectsManagerScript: {fileID: 0}
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b23547b7f6c440fba626a297c7083d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

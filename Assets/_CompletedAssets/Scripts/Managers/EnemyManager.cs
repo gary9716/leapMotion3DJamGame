@@ -14,6 +14,7 @@ namespace CompleteProject
         {
             // Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
             InvokeRepeating ("Spawn", spawnTime, spawnTime);
+			playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         }
 
 

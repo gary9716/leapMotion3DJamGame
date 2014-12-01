@@ -177,6 +177,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400028}
+  - 65: {fileID: 6500000}
   m_Layer: 0
   m_Name: Bip01 R Finger1Nub001
   m_TagString: Untagged
@@ -429,7 +430,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
-  m_LocalRotation: {x: -.603143334, y: .501787901, z: .149101973, w: .601826906}
+  m_LocalRotation: {x: -.603143394, y: .501787961, z: .149101987, w: .601826966}
   m_LocalPosition: {x: -.0273678694, y: .0201603081, z: .0273761656}
   m_LocalScale: {x: .999999762, y: 1.00000143, z: 1.0000006}
   m_Children:
@@ -678,6 +679,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400044}
   m_RootOrder: 0
+--- !u!65 &6500000
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100022}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .00999999978, y: .100000001, z: .00999999978}
+  m_Center: {x: -.00499999989, y: .0399999991, z: 9.03793733e-08}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
