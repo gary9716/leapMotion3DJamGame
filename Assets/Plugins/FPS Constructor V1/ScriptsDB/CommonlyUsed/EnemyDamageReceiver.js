@@ -13,6 +13,35 @@ var useHitEffect : boolean = true;
 
 @HideInInspector
 var isEnemy : boolean = false;
+private var animator : Animator;
+//var particleSys : ParticleSystem;
+private var enemyAudio : AudioSource;
+private var enemyCapCollider : CapsuleCollider;
+private var isSinking : boolean;
+private var isDead : boolean;
+
+public var sinkSpeed : float;
+public var scoreValue : float;
+public var deathClip : AudioClip;
+
+function Start() {
+	animator = GetComponent(Animator);
+	//particleSys = GetComponentInChildren(ParticleSystem);
+	enemyAudio = GetComponent(AudioSource);
+	enemyCapCollider = GetComponent(CapsuleCollider);
+	isSinking = false;
+	isDead = false;
+}
+
+function Update() {
+	// If the enemy should be sinking...
+    if(isSinking)
+    {
+        // ... move the enemy down by the sinkSpeed per second.
+        transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
+    }
+
+}
 
 function ApplyDamage(Arr : Object[]){
 	//Info array contains damage and value of fromPlayer boolean (true if the player caused the damage)
@@ -33,13 +62,17 @@ function ApplyDamage(Arr : Object[]){
 	tempFloat = Arr[0];
 	//float.TryParse(Arr[0], tempFloat);
 	hitPoints -= tempFloat*multiplier;
+	enemyAudio.Play ();
+	Debug.Log("hit!,points:" + hitPoints);
+	
 	if (hitPoints <= 0.0) {
 		// Start emitting particles
 		var emitter : ParticleEmitter = GetComponentInChildren(ParticleEmitter);
 		if (emitter)
 			emitter.emit = true;
-
-		Invoke("DelayedDetonate", effectDelay);
+		Death();
+		//Invoke("DelayedDetonate", effectDelay);
+		
 	}
 }
 
@@ -58,13 +91,16 @@ function ApplyDamagePlayer (damage : float){
 		return;
 	//float.TryParse(Arr[0], tempFloat);
 	hitPoints -= damage*multiplier;
+	enemyAudio.Play ();
+	Debug.Log("hit2!,points:" + hitPoints);
+	
 	if (hitPoints <= 0.0) {
 		// Start emitting particles
 		var emitter : ParticleEmitter = GetComponentInChildren(ParticleEmitter);
 		if (emitter)
 			emitter.emit = true;
-
-		Invoke("DelayedDetonate", effectDelay);
+		Death();
+		//Invoke("DelayedDetonate", effectDelay);
 	}
 }
 
@@ -78,13 +114,16 @@ function ApplyDamage (damage : float){
 
 	//float.TryParse(Arr[0], tempFloat);
 	hitPoints -= damage*multiplier;
+	enemyAudio.Play ();
+	Debug.Log("hit3!,points:" + hitPoints);
+	
 	if (hitPoints <= 0.0) {
 		// Start emitting particles
 		var emitter : ParticleEmitter = GetComponentInChildren(ParticleEmitter);
 		if (emitter)
 			emitter.emit = true;
-
-		Invoke("DelayedDetonate", effectDelay);
+		Death();
+		//Invoke("DelayedDetonate", effectDelay);
 	}
 }
 
@@ -117,4 +156,39 @@ function Detonate(){
 	BroadcastMessage ("Die", SendMessageOptions.DontRequireReceiver);
 	Destroy(gameObject);
 
+}
+
+function Death ()
+{
+    // The enemy is dead.
+    isDead = true;
+
+    // Turn the collider into a trigger so shots can pass through it.
+    enemyCapCollider.isTrigger = true;
+
+    // Tell the animator that the enemy is dead.
+    animator.SetTrigger ("Dead");
+
+    // Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
+    enemyAudio.clip = deathClip;
+    enemyAudio.Play ();
+}
+
+
+function StartSinking ()
+{
+    // Find and disable the Nav Mesh Agent.
+    GetComponent(NavMeshAgent).enabled = false;
+
+    // Find the rigidbody component and make it kinematic (since we use Translate to sink the enemy).
+    GetComponent(Rigidbody).isKinematic = true;
+
+    // The enemy should no sink.
+    isSinking = true;
+
+    // Increase the score by the enemy's score value.
+    //ScoreManager.score += scoreValue;
+
+    // After 2 seconds destory the enemy.
+    Destroy (gameObject, 2f);
 }
